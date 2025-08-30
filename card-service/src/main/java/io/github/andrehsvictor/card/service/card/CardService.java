@@ -33,8 +33,8 @@ public class CardService {
         card.setDeckId(deckId);
         card = cardRepository.save(card);
         CardCreationEventDto cardCreationEventDto = CardCreationEventDto.builder()
-                .cardId(card.getId())
-                .deckId(deckId)
+                .cardId(card.getId().toString())
+                .deckId(deckId.toString())
                 .build();
         rabbitTemplate.convertAndSend("q.card.created", cardCreationEventDto);
         return card;
@@ -53,8 +53,8 @@ public class CardService {
         Card card = findById(id);
         cardRepository.delete(card);
         CardDeletionEventDto cardDeletionEventDto = CardDeletionEventDto.builder()
-                .cardId(card.getId())
-                .deckId(card.getDeckId())
+                .cardId(card.getId().toString())
+                .deckId(card.getDeckId().toString())
                 .build();
         rabbitTemplate.convertAndSend("q.card.deleted", cardDeletionEventDto);
     }

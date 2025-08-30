@@ -60,7 +60,7 @@ public class DeckService {
     public void delete(UUID id) throws NoSuchElementException {
         Deck deck = deckRepository.findById(id).orElseThrow();
         deckRepository.delete(deck);
-        rabbitTemplate.convertAndSend("q.deck.deleted", id);
+        rabbitTemplate.convertAndSend("q.deck.deleted", id.toString());
     }
 
 }

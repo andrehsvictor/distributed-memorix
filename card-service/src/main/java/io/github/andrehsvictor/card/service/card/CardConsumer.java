@@ -14,8 +14,8 @@ public class CardConsumer {
     private final CardService cardService;
 
     @RabbitListener(queues = { "q.deck.deleted" })
-    public void handleDeckDeletedEvent(UUID deckId) {
-        cardService.deleteByDeckId(deckId);
+    public void handleDeckDeletedEvent(String deckId) {
+        cardService.deleteByDeckId(UUID.fromString(deckId));
     }
 
 }
