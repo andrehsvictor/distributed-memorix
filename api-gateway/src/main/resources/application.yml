@@ -1,6 +1,22 @@
 spring:
   application:
     name: @project.artifactId@
+  
+  cloud:
+    gateway:
+      routes:
+        - id: card-service
+          uri: lb://card-service
+          predicates:
+            - Path=/api/v1/cards/**
+          filters:
+            - StripPrefix=2
+        - id: deck-service
+          uri: lb://deck-service
+          predicates:
+            - Path=/api/v1/decks/**
+          filters:
+            - StripPrefix=2
 
 eureka:
   client:
