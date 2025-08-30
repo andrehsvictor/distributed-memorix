@@ -58,9 +58,7 @@ public class DeckService {
     public Deck update(UUID id, PutDeckDto putDeckDto) throws NoSuchElementException {
         Deck deck = deckRepository.findById(id).orElseThrow();
         deckMapper.updateDeckFromPutDeckDto(putDeckDto, deck);
-        deck = deckRepository.save(deck);
-        rabbitTemplate.convertAndSend("q.deck.updated", deck);
-        return deck;
+        return deckRepository.save(deck);
     }
 
     @Transactional
