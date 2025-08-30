@@ -1,11 +1,11 @@
-package io.github.andrehsvictor.deck.service.dto.deck;
+package io.github.andrehsvictor.deck.service.shared.dto.deck;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class PutDeckDto {
+public class PostDeckDto {
 
     private String name;
     private String description;

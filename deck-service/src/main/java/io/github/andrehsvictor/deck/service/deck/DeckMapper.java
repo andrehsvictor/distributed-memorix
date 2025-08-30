@@ -4,8 +4,8 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
-import io.github.andrehsvictor.deck.service.dto.deck.PostDeckDto;
-import io.github.andrehsvictor.deck.service.dto.deck.PutDeckDto;
+import io.github.andrehsvictor.deck.service.shared.dto.deck.PostDeckDto;
+import io.github.andrehsvictor.deck.service.shared.dto.deck.PutDeckDto;
 
 @Mapper(componentModel = "spring")
 public interface DeckMapper {
