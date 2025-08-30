@@ -1,0 +1,30 @@
+services:
+  decks-database:
+    image: postgres:alpine
+    container_name: memorix-decks-database
+    environment:
+      POSTGRES_DB: decks
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  card-database:
+    image: mongo:alpine
+    container_name: memorix-card-database
+    environment:
+      MONGO_INITDB_DATABASE: cards
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    ports:
+      - "27017:27017"
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: memorix-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
