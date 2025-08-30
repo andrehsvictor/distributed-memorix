@@ -9,7 +9,7 @@ spring:
           uri: lb://card-service
           predicates:
             - Path=/api/v1/cards/**
-            - Path=/api/v1/decks/**/cards/**
+            - Path=/api/v1/decks/*/cards
           filters:
             - StripPrefix=2
         - id: deck-service
