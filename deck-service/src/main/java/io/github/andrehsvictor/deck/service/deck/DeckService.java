@@ -40,6 +40,10 @@ public class DeckService {
                 pageable);
     }
 
+    public Deck persist(Deck deck) {
+        return deckRepository.save(deck);
+    }
+
     public Deck findById(UUID id) throws NoSuchElementException {
         return deckRepository.findById(id).orElseThrow();
     }
