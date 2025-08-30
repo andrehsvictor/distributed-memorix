@@ -53,6 +53,11 @@ public class CardService {
         rabbitTemplate.convertAndSend("q.card.deleted", id);
     }
 
+    @Transactional
+    public void deleteByDeckId(UUID deckId) {
+        cardRepository.deleteAllByDeckId(deckId);
+    }
+
     public Page<Card> findAllByDeckId(UUID deckId, Pageable pageable) {
         if (!deckService.existsById(deckId)) {
             throw new IllegalArgumentException("Deck with id " + deckId + " does not exist");
