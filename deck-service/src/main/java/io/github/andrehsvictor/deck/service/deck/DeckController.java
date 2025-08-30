@@ -1,6 +1,5 @@
 package io.github.andrehsvictor.deck.service.deck;
 
-import java.time.Instant;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -38,20 +37,12 @@ public class DeckController {
 
     @GetMapping("/decks")
     public ResponseEntity<Page<Deck>> findAll(
-            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String name,
             @RequestParam(required = false) String description,
-            @RequestParam(required = false) Instant createdAtStart,
-            @RequestParam(required = false) Instant createdAtEnd,
-            @RequestParam(required = false) Instant updatedAtStart,
-            @RequestParam(required = false) Instant updatedAtEnd,
             Pageable pageable) {
         Page<Deck> decks = deckService.findAllWithFilters(
-                title,
+                name,
                 description,
-                createdAtStart,
-                createdAtEnd,
-                updatedAtStart,
-                updatedAtEnd,
                 pageable);
         return ResponseEntity.ok(decks);
     }

@@ -1,6 +1,5 @@
 package io.github.andrehsvictor.deck.service.deck;
 
-import java.time.Instant;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -23,20 +22,12 @@ public class DeckService {
     private final RabbitTemplate rabbitTemplate;
 
     public Page<Deck> findAllWithFilters(
-            String title,
+            String name,
             String description,
-            Instant createdAtStart,
-            Instant createdAtEnd,
-            Instant updatedAtStart,
-            Instant updatedAtEnd,
             Pageable pageable) {
         return deckRepository.findAllWithFilters(
-                title,
+                name,
                 description,
-                createdAtStart,
-                createdAtEnd,
-                updatedAtStart,
-                updatedAtEnd,
                 pageable);
     }
 
