@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.andrehsvictor.card.service.deck.DeckService;
 import io.github.andrehsvictor.card.service.shared.dto.card.CardCreationEventDto;
+import io.github.andrehsvictor.card.service.shared.dto.card.CardDeletionEventDto;
 import io.github.andrehsvictor.card.service.shared.dto.card.PostCardDto;
 import io.github.andrehsvictor.card.service.shared.dto.card.PutCardDto;
 import lombok.RequiredArgsConstructor;
@@ -49,8 +50,13 @@ public class CardService {
 
     @Transactional
     public void delete(UUID id) {
-        cardRepository.deleteById(id);
-        rabbitTemplate.convertAndSend("q.card.deleted", id);
+        Card card = findById(id);
+        cardRepository.delete(card);
+        CardDeletionEventDto cardDeletionEventDto = CardDeletionEventDto.builder()
+                .cardId(card.getId())
+                .deckId(card.getDeckId())
+                .build();
+        rabbitTemplate.convertAndSend("q.card.deleted", cardDeletionEventDto);
     }
 
     @Transactional
