@@ -28,8 +28,11 @@ public class DeckController {
     private final DeckService deckService;
 
     @RequestMapping(method = RequestMethod.HEAD, value = "/decks/{id}")
-    public ResponseEntity<Boolean> existsById(@PathVariable UUID id) {
-        return ResponseEntity.ok(deckService.existsById(id));
+    public ResponseEntity<Void> existsById(@PathVariable UUID id) {
+        if (deckService.existsById(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/decks")

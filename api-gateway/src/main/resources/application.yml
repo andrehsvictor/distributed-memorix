@@ -5,11 +5,16 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: card-service
+        - id: deck-card-service
+          uri: lb://card-service
+          predicates:
+            - Path=/api/v1/decks/*/cards/**
+          filters:
+            - StripPrefix=2
+        - id: general-card-service
           uri: lb://card-service
           predicates:
             - Path=/api/v1/cards/**
-            - Path=/api/v1/decks/*/cards
           filters:
             - StripPrefix=2
         - id: deck-service
