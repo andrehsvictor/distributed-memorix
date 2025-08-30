@@ -1,5 +1,6 @@
 package io.github.andrehsvictor.deck.service.deck;
 
+import java.time.Instant;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -21,8 +22,22 @@ public class DeckService {
     private final DeckMapper deckMapper;
     private final RabbitTemplate rabbitTemplate;
 
-    public Page<Deck> findAll(Pageable pageable) {
-        return deckRepository.findAll(pageable);
+    public Page<Deck> findAllWithFilters(
+            String title,
+            String description,
+            Instant createdAtStart,
+            Instant createdAtEnd,
+            Instant updatedAtStart,
+            Instant updatedAtEnd,
+            Pageable pageable) {
+        return deckRepository.findAllWithFilters(
+                title,
+                description,
+                createdAtStart,
+                createdAtEnd,
+                updatedAtStart,
+                updatedAtEnd,
+                pageable);
     }
 
     public Deck findById(UUID id) throws NoSuchElementException {
