@@ -1,3 +1,14 @@
 spring:
   application:
     name: @project.artifactId@
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+
+  data:
+    mongodb:
+      uri: mongodb://mongo:mongo@localhost:27017/deckdb?authSource=admin
+      uuid-representation: standard
