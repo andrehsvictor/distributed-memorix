@@ -13,7 +13,7 @@ public interface DeckRepository extends JpaRepository<Deck, UUID> {
 
     @Query("""
             SELECT d FROM Deck d
-            WHERE (:title IS NULL OR LOWER(d.title) LIKE LOWER(CONCAT('%', :title, '%')))
+            WHERE (:name IS NULL OR LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%')))
             AND (:description IS NULL OR LOWER(d.description) LIKE LOWER(CONCAT('%', :description, '%')))
             AND (:createdAtStart IS NULL OR d.createdAt >= :createdAtStart)
             AND (:createdAtEnd IS NULL OR d.createdAt <= :createdAtEnd)
@@ -22,7 +22,7 @@ public interface DeckRepository extends JpaRepository<Deck, UUID> {
             ORDER BY d.createdAt DESC
             """)
     Page<Deck> findAllWithFilters(
-            @Param("title") String title,
+            @Param("name") String name,
             @Param("description") String description,
             @Param("createdAtStart") Instant createdAtStart,
             @Param("createdAtEnd") Instant createdAtEnd,

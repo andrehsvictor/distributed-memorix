@@ -9,9 +9,9 @@ services:
     ports:
       - "5432:5432"
 
-  card-database:
-    image: mongo:alpine
-    container_name: memorix-card-database
+  cards-database:
+    image: mongo:latest
+    container_name: memorix-cards-database
     environment:
       MONGO_INITDB_DATABASE: cards
       MONGO_INITDB_ROOT_USERNAME: mongo
